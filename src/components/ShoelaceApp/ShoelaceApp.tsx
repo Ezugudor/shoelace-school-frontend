@@ -1,10 +1,23 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { Login, Signup } from "../Auth";
+import Dashboard from "../Dashboard/Dashboard";
 
-const ShoelaceApp: React.FunctionComponent = () => {
+const PrivateRoute = ({ path, ...rest }: any) => {
+  return true ? <Outlet /> : <Navigate to="/signup" />;
+};
+
+const ShoelaceApp = () => {
   return (
     <>
-      <Routes></Routes>
+      <Routes>
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/*" element={<Dashboard />} />
+        </Route>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </>
   );
 };

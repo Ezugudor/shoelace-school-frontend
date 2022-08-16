@@ -1,0 +1,29 @@
+.Container{
+    background-color: #111;
+    color:#aaa;
+    height:100vh ;
+    width: inherit;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    /* justify-content:pace-around; */
+
+}
+
+.Logo{
+    height:50px;
+    width: 50px;
+    border-radius: 50%;
+    background:#222;
+    align-self: center;
+    margin: 40px auto
+}
+
+ul{
+    align-self: center;
+}
+
+ul li a{
+    color:#eee;;
+    text-decoration: none;
+}

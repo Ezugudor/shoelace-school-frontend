@@ -1,0 +1,17 @@
+.InsideBody{
+    display: flex;
+}
+
+.SideBar{
+    height:100vh;
+    width:15vw;
+}
+
+.LayoutRight{
+    width:85vw;
+    background-color: #f1f1f1;
+}
+
+.TableSection{
+    padding:10px
+}
