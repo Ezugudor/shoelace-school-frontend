@@ -33,7 +33,15 @@ const Dashboard: FC = () => {
     setEditSchool(!editSchool);
   };
 
-  const handleSchoolDelete = (schoolID: string) => {};
+  const handleSchoolDelete = (schoolID: string) => {
+    //TODO: Change the confirm prompt below to custom / better UI one
+    if (
+      !window.confirm(`Confirm you want to delete school with ID ${schoolID} ?`)
+    )
+      return false;
+    const newSchools = schools.filter(school => school.id != schoolID);
+    setSchools(newSchools);
+  };
 
   const handleSchoolEdit = (schoolID: string) => {
     const currentSchool = schools.find(s => s.id === schoolID) as School;
