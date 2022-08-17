@@ -1,7 +1,14 @@
 import React, { FC } from "react";
+import { School } from "../Dashboard";
 import styles from "./SchoolTable.module.css";
 
-const SchoolTable: FC = () => {
+interface SchoolTableProps {
+  deleteSchool: (id: string) => any;
+  editSchool: (id: string) => any;
+  schools: School[];
+}
+
+const SchoolTable: FC<SchoolTableProps> = props => {
   return (
     <div className={styles.Container}>
       <div className={styles.TableHead}>
@@ -18,26 +25,36 @@ const SchoolTable: FC = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>A03433HY7</td>
-            <td>Oxford University</td>
-            <td>United States</td>
-            <td>
-              <a
-                href="#"
-                className={`${styles.ActionBtn} ${styles.ActionBtnEdit}`}
-              >
-                Edit
-              </a>
-              <a
-                href="#"
-                className={`${styles.ActionBtn} ${styles.ActionBtnDelete}`}
-              >
-                Delete
-              </a>
-            </td>
-          </tr>
+          {props.schools.map(school => {
+            return (
+              <tr>
+                <td>1</td>
+                <td>A03433HY7</td>
+                <td>Oxford University</td>
+                <td>United States</td>
+                <td>
+                  <a
+                    href="#"
+                    className={`${styles.ActionBtn} ${styles.ActionBtnEdit}`}
+                    onClick={() => {
+                      props.editSchool("efwfas");
+                    }}
+                  >
+                    Edit
+                  </a>
+                  <a
+                    href="#"
+                    className={`${styles.ActionBtn} ${styles.ActionBtnDelete}`}
+                    onClick={() => {
+                      props.deleteSchool("efwfas");
+                    }}
+                  >
+                    Delete
+                  </a>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
