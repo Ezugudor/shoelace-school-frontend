@@ -8,20 +8,17 @@ import EditSchoolModal from "./EditSchoolModal/EditSchoolModal";
 import { School, SchoolKeys } from "../../models/Schools";
 import { schoolsMock } from "../../mocks/schoolMock";
 
+const emptySchoolObj: School = {
+  id: "",
+  name: "",
+  location: ""
+};
 const Dashboard: FC = () => {
   const [editSchool, setEditSchool] = useState(false);
   const [schools, setSchools] = useState(schoolsMock);
-  const [selectedSchool, setSelectedSchool] = useState<School>({
-    id: "",
-    name: "",
-    location: ""
-  });
+  const [selectedSchool, setSelectedSchool] = useState<School>(emptySchoolObj);
 
-  const [newSchool, setNewSchool] = useState<School>({
-    id: "",
-    name: "",
-    location: ""
-  });
+  const [newSchool, setNewSchool] = useState<School>(emptySchoolObj);
 
   const toggleEditSchool = () => {
     setEditSchool(!editSchool);
@@ -67,13 +64,18 @@ const Dashboard: FC = () => {
     toggleEditSchool();
   };
 
+  const resetForm = () => {
+    setNewSchool(emptySchoolObj);
+  };
+
   const addNewSchool = (e: FormEvent) => {
     e.preventDefault();
     const cNewSchool = { ...newSchool };
     cNewSchool.id = `sch-${Math.random()}`; //This for testing only and should be set from backend and removed.
     const newSchools = [...schools, cNewSchool];
-    //TODO: Validate and Hit the Network
+    //TODO: Validate Input and Hit the Network
     setSchools(newSchools);
+    resetForm();
   };
 
   return (
@@ -89,6 +91,7 @@ const Dashboard: FC = () => {
           <main>
             <section>
               <NewSchoolForm
+                school={newSchool}
                 setFieldValue={setNewSchoolField}
                 addSchool={addNewSchool}
               />
