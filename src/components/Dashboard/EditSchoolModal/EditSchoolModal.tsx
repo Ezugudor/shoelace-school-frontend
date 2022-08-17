@@ -1,6 +1,6 @@
 import React, { FC, FormEvent } from "react";
+import { School, SchoolKeys } from "../../../models/Schools";
 import Modal from "../../HOC/Modal/Modal";
-import { School, SchoolKeys } from "../Dashboard";
 import styles from "./EditSchoolModal.module.css";
 
 interface EditSchoolModalProps {

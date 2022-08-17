@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { School } from "../Dashboard";
+import { School } from "../../../models/Schools";
 import styles from "./SchoolTable.module.css";
 
 interface SchoolTableProps {

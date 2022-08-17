@@ -5,20 +5,8 @@ import NewSchoolForm from "./NewSchoolForm/NewSchoolForm";
 import SchoolTable from "./SchoolTable/SchoolTable";
 import styles from "./Dashboard.module.css";
 import EditSchoolModal from "./EditSchoolModal/EditSchoolModal";
-
-export interface School {
-  id: string;
-  name: string;
-  location: string;
-}
-
-export type SchoolKeys = "id" | "name" | "location";
-
-const schoolsMock: School[] = [
-  { id: "abcd", name: "Oxford University", location: "United State" },
-  { id: "efgh", name: "Cambride University", location: "United State" },
-  { id: "ijkl", name: "University of Nigeria Nsukka", location: "Nigeria" }
-];
+import { School, SchoolKeys } from "../../models/Schools";
+import { schoolsMock } from "../../mocks/schoolMock";
 
 const Dashboard: FC = () => {
   const [editSchool, setEditSchool] = useState(false);
@@ -29,21 +17,27 @@ const Dashboard: FC = () => {
     location: ""
   });
 
+  const [newSchool, setNewSchool] = useState<School>({
+    id: "",
+    name: "",
+    location: ""
+  });
+
   const toggleEditSchool = () => {
     setEditSchool(!editSchool);
   };
 
   const handleSchoolDelete = (schoolID: string) => {
-    //TODO: Change the confirm prompt below to custom / better UI one
     if (
       !window.confirm(`Confirm you want to delete school with ID ${schoolID} ?`)
     )
       return false;
     const newSchools = schools.filter(school => school.id != schoolID);
+    //TODO: Hit the Network
     setSchools(newSchools);
   };
 
-  const handleSchoolEdit = (schoolID: string) => {
+  const prepSchoolEdit = (schoolID: string) => {
     const currentSchool = schools.find(s => s.id === schoolID) as School;
     setSelectedSchool(currentSchool);
     toggleEditSchool();
@@ -55,6 +49,12 @@ const Dashboard: FC = () => {
     setSelectedSchool(school);
   };
 
+  const setNewSchoolField = (key: SchoolKeys, value: string) => {
+    const school = { ...newSchool };
+    school[key] = value;
+    setNewSchool(school);
+  };
+
   const saveSelectedSchool = (e: FormEvent) => {
     e.preventDefault();
     const copySchools = [...schools];
@@ -62,8 +62,18 @@ const Dashboard: FC = () => {
       school => school.id === selectedSchool.id
     );
     copySchools[currentIndex] = selectedSchool;
+    //TODO: Validate and Hit the Network
     setSchools(copySchools);
     toggleEditSchool();
+  };
+
+  const addNewSchool = (e: FormEvent) => {
+    e.preventDefault();
+    const cNewSchool = { ...newSchool };
+    cNewSchool.id = `sch-${Math.random()}`; //This for testing only and should be set from backend and removed.
+    const newSchools = [...schools, cNewSchool];
+    //TODO: Validate and Hit the Network
+    setSchools(newSchools);
   };
 
   return (
@@ -78,13 +88,16 @@ const Dashboard: FC = () => {
           </header>
           <main>
             <section>
-              <NewSchoolForm />
+              <NewSchoolForm
+                setFieldValue={setNewSchoolField}
+                addSchool={addNewSchool}
+              />
             </section>
             <section className={styles.TableSection}>
               <SchoolTable
                 schools={schools}
                 deleteSchool={handleSchoolDelete}
-                editSchool={handleSchoolEdit}
+                editSchool={prepSchoolEdit}
               />
             </section>
           </main>
