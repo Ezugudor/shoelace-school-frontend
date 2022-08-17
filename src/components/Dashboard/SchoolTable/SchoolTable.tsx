@@ -25,19 +25,19 @@ const SchoolTable: FC<SchoolTableProps> = props => {
           </tr>
         </thead>
         <tbody>
-          {props.schools.map(school => {
+          {props.schools.map((school, index) => {
             return (
-              <tr>
-                <td>1</td>
-                <td>A03433HY7</td>
-                <td>Oxford University</td>
-                <td>United States</td>
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{school.id}</td>
+                <td>{school.name}</td>
+                <td>{school.location}</td>
                 <td>
                   <a
                     href="#"
                     className={`${styles.ActionBtn} ${styles.ActionBtnEdit}`}
                     onClick={() => {
-                      props.editSchool("efwfas");
+                      props.editSchool(school.id);
                     }}
                   >
                     Edit
@@ -46,7 +46,7 @@ const SchoolTable: FC<SchoolTableProps> = props => {
                     href="#"
                     className={`${styles.ActionBtn} ${styles.ActionBtnDelete}`}
                     onClick={() => {
-                      props.deleteSchool("efwfas");
+                      props.deleteSchool(school.id);
                     }}
                   >
                     Delete
