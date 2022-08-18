@@ -1,0 +1,28 @@
+.InsideBody{
+    display: flex;
+}
+
+.LayoutLeft{
+    height:100vh;
+    width:50vw;
+    background-color: #111;
+    color:#aaa;
+}
+
+.LayoutRight{
+    width:50vw;
+    background-color: #f1f1f1;
+}
+
+.Logo{
+    height:50px;
+    width: 50px;
+    border-radius: 50%;
+    background:#222;
+    align-self: center;
+    margin: 40px auto
+}
+
+.FormCont{
+    padding: 10vw;
+}
