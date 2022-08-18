@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
-import { Login, Signup } from "../Auth";
+import { Login } from "../Auth";
 import Dashboard from "../Dashboard/Dashboard";
 
 const PrivateRoute = ({ path, ...rest }: any) => {
@@ -15,7 +15,6 @@ const ShoelaceApp = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="/*" element={<Dashboard />} />
         </Route>
-        <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </>
