@@ -26,18 +26,22 @@ In the project directory, you can run:
 - Open your terminal and run `git clone https://github.com/Ezugudor/shoelace-school-frontend.git`
 - run `cd shoelace-school-frontend` to change to the project directory.
 
-##### 3.) Start the app (Development)
+##### 3.) Install project dependencies / packages
+
+- run `npm install` to install all required dependencies.
+
+##### 4.) Start the app (Development)
 
 - run `npm run start` to start the app in development mode.
   Notice that app will automatically open in your default browser at [http://localhost:3000](http://localhost:3000).
 
-##### 4.) Test the app
+##### 5.) Test the app
 
 - run `npm run test`.
 
 ## Deploy to Production?
 
-##### 5.) Build the app
+##### 6.) Build the app
 
 - run `npm run build` to build the app for production to the `build` folder.\
   This step correctly bundles this React project in production mode and optimizes the build for the best performance.
