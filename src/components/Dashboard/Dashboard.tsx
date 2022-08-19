@@ -6,11 +6,11 @@ import SchoolTable from "./SchoolTable/SchoolTable";
 import styles from "./Dashboard.module.css";
 import EditSchoolModal from "./EditSchoolModal/EditSchoolModal";
 import { School, SchoolKeys } from "../../models/Schools";
-import { schoolsMock } from "../../mocks/schoolMock";
 import withAuth from "../../context/withAuth";
 import withBackendAccess from "../../context/withBackendAccess";
 import { Authentication } from "../../context/Auth";
 import { BackendProps } from "../../context/Backend";
+import { useSchool } from "../../hooks/useSchool";
 
 const emptySchoolObj: School = {
   id: "",
@@ -26,7 +26,7 @@ interface DashboardProps {
 const Dashboard: FC<DashboardProps> = props => {
   const { auth, backend } = props;
   const [editSchool, setEditSchool] = useState(false);
-  const [schools, setSchools] = useState(schoolsMock);
+  const [schools, setSchools] = useSchool(backend);
   const [selectedSchool, setSelectedSchool] = useState<School>({} as School);
   const [newSchool, setNewSchool] = useState<School>(emptySchoolObj);
   const toggleEditSchool = () => {
