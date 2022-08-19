@@ -1,10 +1,17 @@
 import React from "react";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { AuthConsumer, Authentication } from "../../context/Auth";
 import { Login } from "../Auth";
 import Dashboard from "../Dashboard/Dashboard";
 
-const PrivateRoute = ({ path, ...rest }: any) => {
-  return true ? <Outlet /> : <Navigate to="/signup" />;
+const PrivateRoute = () => {
+  return (
+    <AuthConsumer>
+      {({ authenticated, role }: Authentication) => {
+        return authenticated ? <Outlet /> : <Navigate to="/Login" />;
+      }}
+    </AuthConsumer>
+  );
 };
 
 const ShoelaceApp = () => {

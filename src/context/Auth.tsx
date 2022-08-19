@@ -37,7 +37,7 @@ const getDefaultState = (): AuthProviderState => {
   }
   return {
     currentToken,
-    authenticated: false,
+    authenticated: true, //TODO: change this value to false when you have consumed api
     role: UserRole.NONE,
     email: "",
     expired: false

@@ -33,8 +33,6 @@ const Dashboard: FC<DashboardProps> = props => {
     setEditSchool(!editSchool);
   };
 
-  console.log("dash backend", backend.errors);
-  console.log("dash auth", auth.authenticated);
   const handleSchoolDelete = (schoolID: string) => {
     if (
       !window.confirm(`Confirm you want to delete school with ID ${schoolID} ?`)
