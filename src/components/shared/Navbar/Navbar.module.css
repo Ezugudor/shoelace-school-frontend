@@ -1,0 +1,15 @@
+.Container{
+    background-color: #fff;
+    padding:20px 30px;
+    border-bottom: 1px solid #ddd;
+}
+
+.LogoutBtn{
+    text-decoration: none;
+    color:#333;
+    float:right
+}
+
+.Clearfix{
+    clear:both
+}
