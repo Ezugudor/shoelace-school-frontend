@@ -2,8 +2,10 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import Sidebar from "./Sidebar";
 
-it("renders learn react link", () => {
-  // render(<Sidebar />);
-  // const linkElement = screen.getByText(/learn react/i);
-  // expect(linkElement).toBeInTheDocument();
+describe("Sidebar Component", () => {
+  it("renders Logout button", () => {
+    render(<Sidebar />);
+    const link = screen.getByText(/dashboard/i);
+    expect(link).toBeInTheDocument();
+  });
 });

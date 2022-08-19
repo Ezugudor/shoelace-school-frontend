@@ -1,9 +1,18 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import Navbar from "./Navbar";
+import { BrowserRouter } from "react-router-dom";
 
-it("renders learn react link", () => {
-  // render(<Navbar />);
-  // const linkElement = screen.getByText(/learn react/i);
-  // expect(linkElement).toBeInTheDocument();
+describe("Navbar Component", () => {
+  const MockNavbar = () => (
+    <BrowserRouter>
+      <Navbar />
+    </BrowserRouter>
+  );
+
+  it("renders Logout button", () => {
+    render(<MockNavbar />);
+    const btn = screen.getByText(/logout/i);
+    expect(btn).toBeInTheDocument();
+  });
 });

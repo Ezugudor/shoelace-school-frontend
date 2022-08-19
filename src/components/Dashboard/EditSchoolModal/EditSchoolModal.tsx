@@ -4,7 +4,7 @@ import Modal from "../../HOC/Modal/Modal";
 import styles from "./EditSchoolModal.module.css";
 
 interface EditSchoolModalProps {
-  toggleModal: any;
+  toggleModal: () => any;
   show: boolean;
   selectedSchool: School;
   updateSelectedSchool: (key: SchoolKeys, value: string) => any;
