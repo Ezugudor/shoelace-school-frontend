@@ -7,29 +7,40 @@ import styles from "./Dashboard.module.css";
 import EditSchoolModal from "./EditSchoolModal/EditSchoolModal";
 import { School, SchoolKeys } from "../../models/Schools";
 import { schoolsMock } from "../../mocks/schoolMock";
+import withAuth from "../../context/withAuth";
+import withBackendAccess from "../../context/withBackendAccess";
+import { Authentication } from "../../context/Auth";
+import { BackendProps } from "../../context/Backend";
 
 const emptySchoolObj: School = {
   id: "",
   name: "",
   location: ""
 };
-const Dashboard: FC = () => {
+
+interface DashboardProps {
+  auth: Authentication;
+  backend: BackendProps;
+}
+
+const Dashboard: FC<DashboardProps> = props => {
+  const { auth, backend } = props;
   const [editSchool, setEditSchool] = useState(false);
   const [schools, setSchools] = useState(schoolsMock);
-  const [selectedSchool, setSelectedSchool] = useState<School>(emptySchoolObj);
-
+  const [selectedSchool, setSelectedSchool] = useState<School>({} as School);
   const [newSchool, setNewSchool] = useState<School>(emptySchoolObj);
-
   const toggleEditSchool = () => {
     setEditSchool(!editSchool);
   };
 
+  console.log("dash backend", backend.errors);
+  console.log("dash auth", auth.authenticated);
   const handleSchoolDelete = (schoolID: string) => {
     if (
       !window.confirm(`Confirm you want to delete school with ID ${schoolID} ?`)
     )
       return false;
-    const newSchools = schools.filter(school => school.id != schoolID);
+    const newSchools = schools.filter(school => school.id !== schoolID);
     //TODO: Hit the Network
     setSchools(newSchools);
   };
@@ -117,4 +128,4 @@ const Dashboard: FC = () => {
   );
 };
 
-export default Dashboard;
+export default withAuth(withBackendAccess(Dashboard));

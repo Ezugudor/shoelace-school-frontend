@@ -17,11 +17,6 @@ export interface BackendProps extends BackendProviderState {
 
 const BackendContext = createContext<BackendProps>({} as BackendProps);
 
-const [backendState, setBackendState] = useState<BackendProviderState>({
-  loading: false,
-  errors: []
-} as BackendProviderState);
-
 const fetchSchools = (): Promise<void> => {
   return new Promise(() => {});
 };
@@ -31,6 +26,11 @@ const fetchSchool = (schoolId: string): Promise<void> => {
 };
 
 const BackendProvider: FC<BackendProviderProps> = props => {
+  const [backendState, setBackendState] = useState<BackendProviderState>({
+    loading: false,
+    errors: []
+  } as BackendProviderState);
+
   return (
     <BackendContext.Provider
       value={{ ...backendState, fetchSchools, fetchSchool }}

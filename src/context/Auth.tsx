@@ -44,17 +44,6 @@ const getDefaultState = (): AuthProviderState => {
   };
 };
 
-const [currentUser, setCurrentUser] = useState<AuthProviderState>(
-  getDefaultState() as AuthProviderState
-);
-
-useEffect(() => {
-  //TODO: verify that the default token we initially got from Localstorage is still valid
-  if (currentUser.currentToken.trim().length > 0) {
-    //TODO: hit the network here and verify token
-  }
-}, []);
-
 const tokenToState = (token: string): AuthProviderState => {
   const decodedToken: any = jwtDecode(token);
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -75,6 +64,17 @@ const performLogin = (email: string, password: string): Promise<void> => {
 const performLogout = () => {};
 
 const AuthProvider: FC<AuthProviderProps> = props => {
+  const [currentUser, setCurrentUser] = useState<AuthProviderState>(
+    getDefaultState() as AuthProviderState
+  );
+
+  useEffect(() => {
+    //TODO: verify that the default token we initially got from Localstorage is still valid
+    if (currentUser.currentToken.trim().length > 0) {
+      //TODO: hit the network here and verify token
+    }
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{ ...currentUser, performLogin, performLogout }}
